@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('kendaraans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->enum('jenis_kendaraan',['mobil','truk']);
             $table->timestamps();
         });
     }

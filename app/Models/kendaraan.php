@@ -15,6 +15,7 @@ class kendaraan extends Model
     }
 
     protected $fillable = [
-        'nama'
+        'nama',
+        'jenis_kendaraan'
     ];
 }

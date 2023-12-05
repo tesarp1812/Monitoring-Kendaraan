@@ -33,4 +33,7 @@ Route::controller(SekawanController::class)->group(function () {
     Route::get('/laporan_kendaraan', 'laporanKendaraan');
     Route::get('/tambah_laporan', 'buatLaporan');
     Route::post('/simpan_laporan', 'tambahLaporan');
+    //jadwal service kendaraan
+    Route::get('/jadwal_service', 'jadwalService');
+    Route::get('/tambah_jadwal', 'tambahJadwal');
 });

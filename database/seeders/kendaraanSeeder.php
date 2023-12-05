@@ -15,15 +15,18 @@ class kendaraanSeeder extends Seeder
     public function run(): void
     {
         kendaraan::create([
-            'nama' => 'truk_1'
+            'nama' => 'pajero',
+            'jenis_kendaraan' => 'mobil'
         ]);
 
         kendaraan::create([
-            'nama' => 'truk_2'
+            'nama' => 'truk tambang',
+            'jenis_kendaraan' => 'truk'
         ]);
 
         kendaraan::create([
-            'nama' => 'truk_3'
+            'nama' => 'truk fuso',
+            'jenis_kendaraan' => 'truk'
         ]);
     }
 }

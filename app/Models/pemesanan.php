@@ -19,9 +19,14 @@ class pemesanan extends Model
         return $this->belongsTo(kendaraan::class);
     }
 
+    public function driver()
+    {
+        return $this->belongsTo(driver::class);
+    }
+
     protected $fillable = [
         'kendaraan_id',
-        'nama_driver',
+        'driver_id',
         'user_id'
     ];
 }

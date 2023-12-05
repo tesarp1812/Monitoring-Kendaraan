@@ -22,22 +22,26 @@
                         <label for="exampleInputEmail1" class="form-label">Kendaraan</label>
                         <select class="form-select" aria-label="Default select example" name="inputkendaraan">
                             <option selected disabled>pilih kendaraan</option>
-                            <option value="1">Truk No.1</option>
-                            <option value="2">Truk No.2</option>
-                            <option value="3">Truk No.3</option>
+                            <option value="1">Pajero</option>
+                            <option value="2">Truk Tambang</option>
+                            <option value="3">Truk Fuso</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Driver</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Driver"
-                            name="inputdriver">
+                        <label class="form-label">Driver</label>
+                        <select class="form-select" aria-label="Default select example" name="inputdriver">
+                            <option selected disabled>pilih driver</option>
+                            <option value="1">Rian</option>
+                            <option value="2">Dani</option>
+                            <option value="3">Tomo</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Persetujuan</label>
                         <select class="form-select" aria-label="Default select example" name="inputuser">
                             <option selected disabled>pilih kepala bagian</option>
-                            <option value="1">Daniel</option>
-                            <option value="2">Two</option>
+                            <option value="1">Tama</option>
+                            <option value="2">Daniel</option>
                             <option value="3">Three</option>
                         </select>
                     </div>

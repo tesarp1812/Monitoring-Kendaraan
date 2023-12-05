@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('pemesanans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kendaraan_id');
-            $table->string('nama_driver');
+            $table->unsignedBigInteger('driver_id');
             $table->unsignedBigInteger('user_id');
             $table->enum('status', ['belum disetujui', 'disetujui', 'tidak disetujui']);
             $table->timestamps();
 
             $table->foreign('kendaraan_id')->references('id')->on('kendaraans')->onDelete('cascade');
+            $table->foreign('driver_id')->references('id')->on('drivers')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

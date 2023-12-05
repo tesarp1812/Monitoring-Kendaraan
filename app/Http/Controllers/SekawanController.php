@@ -43,7 +43,7 @@ class SekawanController extends Controller
         //dd($request->all());
         pemesanan::create([
             'kendaraan_id' => $request->inputkendaraan,
-            'nama_driver' => $request->inputdriver,
+            'driver_id' => $request->inputdriver,
             'user_id' => $request->inputuser,
             'status' => $request->inputstatus
         ]);
@@ -53,7 +53,7 @@ class SekawanController extends Controller
 
     public function pengajuan(Request $request)
     {
-        $pengajuan = pemesanan::with('user', 'kendaraan')->get();
+        $pengajuan = pemesanan::with('user', 'kendaraan', 'driver')->get();
         //dd($pengajuan);
         return view('pengajuan', compact('pengajuan'));
     }
@@ -70,7 +70,7 @@ class SekawanController extends Controller
     {
         $ubahStatus = pemesanan::find($id);
         $ubahStatus->kendaraan_id = $request->inputkendaraan;
-        $ubahStatus->nama_driver = $request->inputdriver;
+        $ubahStatus->driver_id = $request->inputdriver;
         $ubahStatus->user_id = $request->inputuser;
         $ubahStatus->status = $request->inputstatus;
         $ubahStatus->save();
@@ -99,5 +99,16 @@ class SekawanController extends Controller
         ]);
 
         return redirect('/laporan_kendaraan');
+    }
+
+    // jadwal service
+    public function jadwalService()
+    {
+        return view('jadwal_service');
+    }
+
+    public function tambahJadwal()
+    {
+        return view('tambah_jadwal');
     }
 }

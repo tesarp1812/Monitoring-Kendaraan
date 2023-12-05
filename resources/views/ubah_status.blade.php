@@ -32,10 +32,18 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Driver</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Driver"
-                            name="inputdriver" value="{{ $ubahStatus->nama_driver }}">
+                        <label for="exampleInputEmail1" class="form-label">Driver</label>
+                        <select class="form-select" aria-label="Default select example" name="inputdriver">
+                            <option selected disabled>pilih kendaraan</option>
+                            <option value="1"{{ $ubahStatus->driver_id == 1 ? 'selected' : '' }}>Pajero
+                            </option>
+                            <option value="2"{{ $ubahStatus->driver_id == 2 ? 'selected' : '' }}>Truk Tambang
+                            </option>
+                            <option value="3"{{ $ubahStatus->driver_id == 3 ? 'selected' : '' }}>Truk Fuso
+                            </option>
+                        </select>
                     </div>
+                    
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Persetujuan</label>
                         <select class="form-select" aria-label="Default select example" name="inputuser">

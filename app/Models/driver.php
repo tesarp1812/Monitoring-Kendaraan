@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class driver extends Model
 {
     use HasFactory;
+
+    public function pemesanan()
+    {
+        return $this->hasMany(pemesanan::class);
+    }
+
+    protected $fillable = [
+        'nama'
+    ];
 }
