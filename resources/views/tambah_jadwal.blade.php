@@ -22,14 +22,14 @@
                         <label class="form-label">Kendaraan</label>
                         <select class="form-select" aria-label="Default select example" name="inputkendaraan">
                             <option selected disabled>pilih kendaraan</option>
-                            <option value="1">Pajero</option>
-                            <option value="2">Truk Tambang</option>
-                            <option value="3">Truk Fuso</option>
+                            @foreach ($kendaraan as $k)
+                                <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jadwal Service</label>
-                        <input type="date" class="form-control" placeholder="konsumsi bbm" name="inputbbm" required>
+                        <input type="date" class="form-control" name="inputjadwal" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="/">dashboard</a>

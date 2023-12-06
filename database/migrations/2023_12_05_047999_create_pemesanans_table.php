@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('driver_id');
             $table->unsignedBigInteger('user_id');
             $table->enum('status', ['belum disetujui', 'disetujui', 'tidak disetujui']);
+            $table->date('tanggal_pinjam');
+            $table->date('tanggal_kembali');
             $table->timestamps();
 
             $table->foreign('kendaraan_id')->references('id')->on('kendaraans')->onDelete('cascade');

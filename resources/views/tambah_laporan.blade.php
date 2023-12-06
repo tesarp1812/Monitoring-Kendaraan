@@ -22,9 +22,9 @@
                         <label class="form-label">Kendaraan</label>
                         <select class="form-select" aria-label="Default select example" name="inputkendaraan">
                             <option selected disabled>pilih kendaraan</option>
-                            <option value="1">Truk No.1</option>
-                            <option value="2">Truk No.2</option>
-                            <option value="3">Truk No.3</option>
+                            @foreach ($kendaraan as $k)
+                                <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
@@ -33,7 +33,12 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Driver</label>
-                        <input type="text" class="form-control" placeholder="Driver" name="inputdriver">
+                        <select class="form-select" aria-label="Default select example" name="inputdriver">
+                            <option selected disabled>pilih driver</option>
+                            @foreach ($driver as $d)
+                                <option value="{{ $d->id }}">{{ $d->nama }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="/">dashboard</a>

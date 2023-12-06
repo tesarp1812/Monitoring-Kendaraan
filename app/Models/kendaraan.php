@@ -14,6 +14,11 @@ class kendaraan extends Model
         return $this->hasMany(pemesanan::class);
     }
 
+    public function jadwalService()
+    {
+        return $this->hasMany(jadwalService::class);
+    }
+
     protected $fillable = [
         'nama',
         'jenis_kendaraan'

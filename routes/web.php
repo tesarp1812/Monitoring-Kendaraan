@@ -36,4 +36,7 @@ Route::controller(SekawanController::class)->group(function () {
     //jadwal service kendaraan
     Route::get('/jadwal_service', 'jadwalService');
     Route::get('/tambah_jadwal', 'tambahJadwal');
+    Route::post('/simpan_jadwal', 'simpanJadwal');
+    //riwayat kendaraan
+    Route::get('/riwayat_kendaraan', 'riwayatKendaraan');
 });

@@ -14,9 +14,19 @@ class riwayat_kendaraan extends Model
         return $this->belongsTo(kendaraan::class);
     }
 
+    public function driver()
+    {
+        return $this->belongsTo(driver::class, 'id_pinjam');
+    }
+
+    public function pinjaman()
+    {
+        return $this->belongsTo(pinjaman::class, 'id_pinjam');
+    }
+
     protected $fillable = [
         'kendaraan_id',
         'konsumsi_bbm',
-        'driver',
+        'tanggal    ',
     ];
 }

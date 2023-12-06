@@ -24,6 +24,11 @@ class pemesanan extends Model
         return $this->belongsTo(driver::class);
     }
 
+    public function pinjam()
+    {
+        return $this->hasMany(pinjaman::class);
+    }
+
     protected $fillable = [
         'kendaraan_id',
         'driver_id',

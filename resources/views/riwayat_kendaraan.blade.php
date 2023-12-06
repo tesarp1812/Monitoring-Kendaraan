@@ -11,23 +11,25 @@
 
 <body>
     <a href="/">dashboard</a>
-    <a href="/tambah_jadwal">Tambah Jadwal Service</a>
+    {{-- <a href="/tambah_laporan">buat laporan</a> --}}
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">NO Laporan</th>
                 <th scope="col">Kendaraan</th>
-                <th scope="col">Jenis Kendaraan</th>
-                <th scope="col">Jadwal Service</th>
+                <th scope="col">Konsumsi BBM</th>
+                <th scope="col">Driver</th>
+                <th scope="col">Waktu Laporan</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($jadwal as $list)
+            @foreach ($riwayat as $r)
                 <tr>
-                    <th scope="row">{{ $list->id }}</th>
-                    <td>{{ $list->kendaraan->nama }}</td>
-                    <td>{{ $list->kendaraan->jenis_kendaraan }}</td>
-                    <td>{{ $list->jadwal_service }}</td>
+                    <th scope="row">{{ $r->id }}</th>
+                    <td>{{ $r->riwayat }}</td>
+                    <td>{{ $r->konsumsi_bbm }}</td>
+                    <td>{{ $r->driver->nama }}</td>
+                    <td>{{ $r->created_at }}</td>
                 </tr>
             @endforeach
         </tbody>

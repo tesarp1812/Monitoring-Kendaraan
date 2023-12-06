@@ -22,27 +22,29 @@
                         <label for="exampleInputEmail1" class="form-label">Kendaraan</label>
                         <select class="form-select" aria-label="Default select example" name="inputkendaraan">
                             <option selected disabled>pilih kendaraan</option>
-                            <option value="1">Pajero</option>
-                            <option value="2">Truk Tambang</option>
-                            <option value="3">Truk Fuso</option>
+                            @foreach ($kendaraan as $k)
+                                <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Driver</label>
                         <select class="form-select" aria-label="Default select example" name="inputdriver">
                             <option selected disabled>pilih driver</option>
-                            <option value="1">Rian</option>
-                            <option value="2">Dani</option>
-                            <option value="3">Tomo</option>
+                            @foreach ($driver as $d)
+                                <option value="{{ $d->id }}">{{ $d->nama }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Persetujuan</label>
                         <select class="form-select" aria-label="Default select example" name="inputuser">
                             <option selected disabled>pilih kepala bagian</option>
-                            <option value="1">Tama</option>
-                            <option value="2">Daniel</option>
-                            <option value="3">Three</option>
+                            @foreach ($user as $user)
+                                @if ($user->role == 'kepala')
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endif
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3" hidden>
