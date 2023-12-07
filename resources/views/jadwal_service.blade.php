@@ -10,8 +10,12 @@
 </head>
 
 <body>
-    <a href="/">dashboard</a>
-    <a href="/tambah_jadwal">Tambah Jadwal Service</a>
+    <a class="btn btn-primary" href="/">dashboard</a>
+    @auth
+        @if (auth()->user()->role == 'admin')
+            <a href="/tambah_jadwal">Tambah Jadwal Service</a>
+        @endif
+    @endauth
     <table class="table">
         <thead>
             <tr>

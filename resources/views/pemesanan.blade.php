@@ -47,6 +47,14 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Tanggal Pinjam</label>
+                        <input type="date" name="inputpinjam">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Tanggal Kembali</label>
+                        <input type="date" name="inputkembali">
+                    </div>
                     <div class="mb-3" hidden>
                         <label for="exampleInputEmail1" class="form-label">Status</label>
                         <select class="form-select" aria-label="Default select example" name="inputstatus">

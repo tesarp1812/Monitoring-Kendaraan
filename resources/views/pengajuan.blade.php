@@ -28,19 +28,34 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <tbody>
                         @foreach ($pengajuan as $list)
-                            <tr>
-                                @if ($list->status != 'disetujui')
-                                    <th scope="row">{{ $list->id }}</th>
-                                    <td>{{ $list->kendaraan->nama }}</td>
-                                    <td>{{ $list->driver->nama }}</td>
-                                    <td>{{ $list->user->name }}</td>
-                                    <td><a href="/ubah_status/{{ $list->id }}">{{ $list->status }}</a></td>
+                            @auth
+                                @if (auth()->user()->role == 'admin')
+                                    <!-- Jika user adalah admin, tampilkan semua data -->
+                                    <tr>
+                                        <th scope="row">{{ $list->id }}</th>
+                                        <td>{{ $list->kendaraan->nama }}</td>
+                                        <td>{{ $list->driver->nama }}</td>
+                                        <td>{{ $list->user->name }}</td>
+                                        <td><a href="/ubah_status/{{ $list->id }}">{{ $list->status }}</a></td>
+                                    </tr>
+                                @elseif(auth()->user()->name === $list->user->name && $list->status !== 'disetujui')
+                                    <!-- Jika user bukan admin, tampilkan sesuai dengan nama user dan status -->
+                                    <tr>
+                                        <th scope="row">{{ $list->id }}</th>
+                                        <td>{{ $list->kendaraan->nama }}</td>
+                                        <td>{{ $list->driver->nama }}</td>
+                                        <td>{{ $list->user->name }}</td>
+                                        <td><a href="/ubah_status/{{ $list->id }}">{{ $list->status }}</a></td>
+                                    </tr>
                                 @endif
-
-                            </tr>
+                            @endauth
                         @endforeach
                     </tbody>
+
+                    </tbody>
+
                 </table>
             </div>
         </div>

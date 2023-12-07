@@ -32,6 +32,8 @@ class pemesanan extends Model
     protected $fillable = [
         'kendaraan_id',
         'driver_id',
-        'user_id'
+        'user_id',
+        'tanggal_pinjam',
+        'tanggal_kembali',
     ];
 }

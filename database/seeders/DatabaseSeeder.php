@@ -63,8 +63,8 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 5; $i++) {
             DB::table('users')->insert([
                 'name' => $faker->firstName,
-                'username' => $faker->userName,
-                'password' => '12345',
+                'email' => $faker->email,
+                'password' => bcrypt('12345'),
                 'role' => 'kepala',
                 'remember_token' => Str::random(10),
                 'email_verified_at' => now(),
@@ -73,18 +73,18 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         //faker admin
-        for ($i = 0; $i < 2; $i++) {
-            DB::table('users')->insert([
-                'name' => $faker->firstName,
-                'username' => $faker->userName,
-                'password' => 'admin123',
-                'role' => 'admin',
-                'remember_token' => Str::random(10),
-                'email_verified_at' => now(),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+
+        DB::table('users')->insert([
+            'name' => $faker->firstName,
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin123'),
+            'role' => 'admin',
+            'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
 
         //faker riwayat kendaraan
         // for ($i = 0; $i < 100; $i++) {

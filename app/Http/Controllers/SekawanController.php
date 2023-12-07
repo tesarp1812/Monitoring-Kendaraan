@@ -62,12 +62,14 @@ class SekawanController extends Controller
 
     public function pesanKendaraan(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         pemesanan::create([
             'kendaraan_id' => $request->inputkendaraan,
             'driver_id' => $request->inputdriver,
             'user_id' => $request->inputuser,
-            'status' => $request->inputstatus
+            'status' => $request->inputstatus,
+            'tanggal_pinjam' => $request->inputpinjam,
+            'tanggal_kembali' => $request->inputkembali,
         ]);
 
         return redirect('/');
@@ -82,7 +84,7 @@ class SekawanController extends Controller
 
     public function ubahStatus($id)
     {
-        $ubahStatus = pemesanan::where('id', $id)->first();
+        $ubahStatus = pemesanan::with('kendaraan', 'driver', 'user')->where('id', $id)->first();
         //dd($ubahStatus);
         return view('ubah_Status', ['ubahStatus' => $ubahStatus]);
     }
@@ -90,6 +92,7 @@ class SekawanController extends Controller
     // ubah status kendaraan
     public function updateStatus(Request $request, $id)
     {
+        //dd($request->all());
         $ubahStatus = pemesanan::find($id);
         $ubahStatus->kendaraan_id = $request->inputkendaraan;
         $ubahStatus->driver_id = $request->inputdriver;
