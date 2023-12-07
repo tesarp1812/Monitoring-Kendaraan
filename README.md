@@ -65,9 +65,9 @@ Aplikasi ini dibangun dengan menggunakan framework Laravel versi 10.0.
     php artisan key:generate
     ```
 
-    - Migrasikan basis data.
+    - Migrasikan basis data ( tambahan --seed agar menjalankan semua seeder yang telah dibuat).
 
-    ```bash ( tambahan --seed agar menjalankan semua seeder yang telah dibuat)
+    ```bash 
     php artisan migrate --seed
     ```
 
