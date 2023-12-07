@@ -11,11 +11,11 @@
 
 Berikut adalah daftar username dan password untuk mengakses aplikasi:
 
-| Username | Password    |
-|----------|-------------|
-| user1    | password123 |
-| admin    | adminpass   |
-| ...
+Untuk role admin 
+email : admin@admin.com
+password : admin123
+
+untuk role kepala bagian email acak bisa dilihat didatabase karena menggunakan seeder fake, untuk password semua sama '12345'
 
 ## Versi Database
 
@@ -23,11 +23,11 @@ Aplikasi ini dikembangkan dengan menggunakan MySQL versi 8.0.3.
 
 ## Versi PHP
 
-Aplikasi ini memerlukan PHP versi 7.4.0 atau yang lebih tinggi.
+Aplikasi ini memerlukan PHP versi 8.2.0 .
 
 ## Framework
 
-Aplikasi ini dibangun dengan menggunakan framework Laravel versi 8.0.
+Aplikasi ini dibangun dengan menggunakan framework Laravel versi 10.0.
 
 ## Panduan Penggunaan Aplikasi
 
@@ -36,7 +36,7 @@ Aplikasi ini dibangun dengan menggunakan framework Laravel versi 8.0.
     - Clone repositori ini ke dalam direktori lokal Anda.
 
     ```bash
-    git clone https://github.com/namauser/nama-aplikasi.git
+    git clone https://github.com/tesarp1812/sekawan.git
     ```
 
     - Masuk ke direktori aplikasi.
@@ -57,7 +57,7 @@ Aplikasi ini dibangun dengan menggunakan framework Laravel versi 8.0.
     cp .env.example .env
     ```
 
-    - Sesuaikan konfigurasi database di file `.env` dengan informasi database Anda.
+    - Sesuaikan konfigurasi database di file `.env` dengan informasi database.
 
     - Generate aplikasi key.
 
@@ -67,8 +67,8 @@ Aplikasi ini dibangun dengan menggunakan framework Laravel versi 8.0.
 
     - Migrasikan basis data.
 
-    ```bash
-    php artisan migrate
+    ```bash ( tambahan --seed agar menjalankan semua seeder yang telah dibuat)
+    php artisan migrate --seed
     ```
 
 2. **Menjalankan Aplikasi:**
@@ -82,7 +82,4 @@ Aplikasi ini dibangun dengan menggunakan framework Laravel versi 8.0.
 
 3. **Login:**
     - Gunakan username dan password dari [daftar username dan password](#daftar-username-dan-password) untuk login.
-
-4. **Panduan Lainnya:**
-    - ...
 
