@@ -6,6 +6,9 @@
 - [Versi PHP](#versi-php)
 - [Framework](#framework)
 - [Panduan Penggunaan Aplikasi](#panduan-penggunaan-aplikasi)
+- [physical data model] (https://drive.google.com/file/d/1VDK9bw3bnJFPx4qYupG2R0b19v-MDoHb/view?usp=sharing).
+- [activity diagram] (https://drive.google.com/file/d/1Hr929hj2J8yfiTr2Iu2WApHQxKSkVCxB/view?usp=sharing)
+
 
 ## Daftar Username dan Password
 
