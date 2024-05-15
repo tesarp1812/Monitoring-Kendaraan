@@ -7,7 +7,7 @@
 - [Framework](#framework)
 - [Panduan Penggunaan Aplikasi](#panduan-penggunaan-aplikasi)
 - [physical data model] ([https://drive.google.com/file/d/1VDK9bw3bnJFPx4qYupG2R0b19v-MDoHb/view?usp=sharing](https://drive.google.com/file/d/1PxcQcIit8VhNjAm4ATbjNNv6ouC7Dpj8/view?usp=sharing)).
-- [activity diagram] (https://drive.google.com/file/d/1Hr929hj2J8yfiTr2Iu2WApHQxKSkVCxB/view?usp=sharing)
+- [activity diagram] (https://drive.google.com/file/d/1BT8TNFYOd09Z3Szh_maaCqLnIrWk1zpL/view?usp=sharing)
 
 
 ## Daftar Username dan Password
