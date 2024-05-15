@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MonitorController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SekawanController;
 
 
 /*
@@ -27,19 +27,19 @@ Route::controller(loginController::class)->group(function () {
     Route::post('/logout', 'logout');
 });
 
-Route::controller(SekawanController::class)->group(function () {
+Route::controller(MonitorController::class)->group(function () {
     Route::get('/', 'index')->middleware('auth');
     Route::get('/kendaraan', 'kendaraan')->middleware('auth');
     Route::get('/user', 'user')->middleware('auth');
-    Route::get('/pengajuan', 'pengajuan')->middleware('auth');
+    Route::get('/pengajuan-kendaraan', 'pengajuan')->middleware('auth');
     //pemesananan kendaraan
     Route::get('/pemesanan', 'pemesanan')->middleware('auth');
-    Route::post('/simpan', 'pesanKendaraan')->middleware('auth');
+    Route::post('/simpan-pemesanan', 'pesanKendaraan')->middleware('auth');
     //ubah status
     Route::get('/ubah_status/{id}', 'ubahStatus')->middleware('auth');
     Route::put('update/{id}', 'updateStatus')->middleware('auth');
     //laporan kendaraan
-    Route::get('/laporan_kendaraan', 'laporanKendaraan')->middleware('auth');
+    Route::get('/laporan-kendaraan', 'laporanKendaraan')->middleware('auth');
     Route::get('/tambah_laporan', 'buatLaporan')->middleware('auth');
     Route::post('/simpan_laporan', 'tambahLaporan')->middleware('auth');
     //jadwal service kendaraan

@@ -25,8 +25,8 @@ class riwayat_kendaraan extends Model
     }
 
     protected $fillable = [
-        'kendaraan_id',
+        'id_pinjam',
         'konsumsi_bbm',
-        'tanggal    ',
+        'tanggal',
     ];
 }

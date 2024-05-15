@@ -26,7 +26,7 @@ class pemesanan extends Model
 
     public function pinjam()
     {
-        return $this->hasMany(pinjaman::class);
+        return $this->hasOne(pinjaman::class, 'id_pemesanan');
     }
 
     protected $fillable = [

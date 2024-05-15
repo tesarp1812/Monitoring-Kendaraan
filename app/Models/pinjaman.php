@@ -8,17 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class pinjaman extends Model
 {
     use HasFactory;
-
+    
+    protected $fillable = ['id_pemesanan'];
     public function pemesanan()
     {
-        return $this->belongsTo(driver::class);
+        return $this->belongsTo(pemesanan::class,'id_pemesanan');
     }
 
     public function riwayatKendaraan()
     {
         return $this->hasOne(riwayat_kendaraan::class);
     }
-    protected $fillable = [
-        'id_pemesanan'
-    ];
+    
 }

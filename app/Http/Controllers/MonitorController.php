@@ -8,11 +8,13 @@ use App\Models\User;
 use App\Models\driver;
 use App\Models\pemesanan;
 use App\Models\jadwalService;
+use App\Models\pinjaman;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 
-class SekawanController extends Controller
+class MonitorController extends Controller
 {
 
     public function index()
@@ -72,14 +74,17 @@ class SekawanController extends Controller
             'tanggal_kembali' => $request->inputkembali,
         ]);
 
-        return redirect('/');
+        return redirect('/pengajuan-kendaraan');
     }
 
     public function pengajuan(Request $request)
     {
         $pengajuan = pemesanan::with('user', 'kendaraan', 'driver')->get();
+        $kendaraan = kendaraan::get();
+        $driver = driver::get();
+        $user = User::get();
         //dd($pengajuan);
-        return view('pengajuan', compact('pengajuan'));
+        return view('pengajuan', compact('pengajuan', 'kendaraan', 'driver', 'user'));
     }
 
     public function ubahStatus($id)
@@ -92,14 +97,29 @@ class SekawanController extends Controller
     // ubah status kendaraan
     public function updateStatus(Request $request, $id)
     {
-        //dd($request->all());
-        $ubahStatus = pemesanan::find($id);
-        $ubahStatus->kendaraan_id = $request->inputkendaraan;
-        $ubahStatus->driver_id = $request->inputdriver;
-        $ubahStatus->user_id = $request->inputuser;
-        $ubahStatus->status = $request->inputstatus;
-        $ubahStatus->save();
-        return redirect('pengajuan');
+        try {
+            DB::beginTransaction();
+
+            $ubahStatus = pemesanan::find($id);
+            $ubahStatus->status = $request->inputstatus;
+            $ubahStatus->save();
+
+            if ($request->input('inputstatus') === 'disetujui') {
+                Pinjaman::create([
+                    'id_pemesanan' => $id
+                ]);
+            }
+
+            //dd($request->all());
+
+            DB::commit();
+
+            return redirect('pengajuan-kendaraan')
+                ->with('success', 'Request Berhasil Diubah');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal Memproses Request : ' . $e->getMessage());
+        }
     }
 
     public function laporanKendaraan()
@@ -119,8 +139,28 @@ class SekawanController extends Controller
             ->join('drivers', 'drivers.id', '=', 'pemesanans.driver_id')
             ->join('users', 'users.id', '=', 'pemesanans.user_id')
             ->get();
-        //dd($laporan);
-        return view('laporan_kendaraan', compact('laporan'));
+
+        $currentDate = Carbon::now();
+        $formlaporan = pinjaman::select(
+            'pinjamen.id as id_pinjam',
+            'pemesanans.tanggal_pinjam as pinjam',
+            'pemesanans.tanggal_kembali as kembali',
+            'kendaraans.id as kendaraan_id',
+            'kendaraans.nama as kendaraan',
+            'kendaraans.jenis_kendaraan',
+            'drivers.nama as nama_driver',
+        )
+            ->join('pemesanans', 'pemesanans.id', '=', 'pinjamen.id_pemesanan')
+            ->join('kendaraans', 'kendaraans.id', '=', 'pemesanans.kendaraan_id')
+            ->join('drivers', 'drivers.id', '=', 'pemesanans.driver_id')
+            ->where('tanggal_kembali', '<=', $currentDate)
+            ->get();
+        $kendaraan = kendaraan::get();
+        $driver = driver::get();
+
+        //dd($formlaporan);
+
+        return view('laporan_kendaraan', compact('laporan', 'kendaraan', 'driver', 'formlaporan'));
     }
 
     public function buatLaporan(Request $request)
@@ -135,9 +175,9 @@ class SekawanController extends Controller
     {
         //dd($request->all());
         riwayat_kendaraan::create([
-            'kendaraan_id' => $request->inputkendaraan,
+            'id_pinjam' => $request->inputIdPinjam,
             'konsumsi_bbm' => $request->inputbbm,
-            'driver' => $request->inputdriver
+            'tanggal' => $request->inputTanggal,
         ]);
 
         return redirect('/laporan_kendaraan');
@@ -169,12 +209,4 @@ class SekawanController extends Controller
 
         return redirect('/jadwal_service');
     }
-
-    //riwayat kendaraan
-    // public function riwayatKendaraan()
-    // {
-    //     $riwayat = riwayat_kendaraan::with('pinjaman')->get();
-    //     //dd($riwayat);
-    //     return view('riwayat_kendaraan', compact('riwayat'));
-    // }
 }
