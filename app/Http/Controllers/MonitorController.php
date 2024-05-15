@@ -180,15 +180,17 @@ class MonitorController extends Controller
             'tanggal' => $request->inputTanggal,
         ]);
 
-        return redirect('/laporan_kendaraan');
+        return redirect('/laporan-kendaraan');
     }
 
     // jadwal service
     public function jadwalService()
     {
-        $jadwal = jadwalService::with('kendaraan')->get();
+        $currentDate = Carbon::now();
+        $jadwal = jadwalService::with('kendaraan')->orderBy('jadwal_service')->where('jadwal_service','>=',$currentDate)->get();
+        $kendaraan = kendaraan::get();
         //dd($jadwal);
-        return view('jadwal_service', compact('jadwal'));
+        return view('jadwal_service', compact('jadwal', 'kendaraan'));
     }
 
     public function tambahJadwal()

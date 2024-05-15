@@ -85,6 +85,8 @@
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ps-4">
                                 <li><a href="pengajuan-kendaraan" class="link-dark rounded">Pengajuan Kendaraan</a></li>
                                 <li><a href="laporan-kendaraan" class="link-dark rounded">Laporan Kendaraan </a></li>
+                                <li><a href="jadwal_service" class="link-dark rounded">Jadwal Service Kendaraan </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -111,6 +113,22 @@
             </div>
         </div>
     </div>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-8">
+                    <h2>Total Konsumsi BBM Per Hari</h2>
+                    <canvas id="myChart1"></canvas>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Total Kendaraan Per Hari</h2>
+                    <canvas id="myChart2"></canvas>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
@@ -128,7 +146,59 @@
     {{-- sweet alert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    {{-- chart.js --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // First Chart
+        const ctx1 = document.getElementById('myChart1');
+        const riwayatArray1 = @json($riwayat->toArray());
+        const tanggal1 = riwayatArray1.map(data => data.tanggal);
+        const totalKonsumsiBBM1 = riwayatArray1.map(data => data.total_konsumsi_bbm);
 
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: tanggal1,
+                datasets: [{
+                    label: 'Konsumsi BBM Perhari',
+                    data: totalKonsumsiBBM1,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // second chart
+        const ctx = document.getElementById('myChart2');
+        const data1 = @json($data->toArray());
+        const tanggal2 = data1.map(data => data.tanggal); // Corrected variable name
+        const total_kendaraan = data1.map(data => data.total_kendaraan);
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: tanggal2, // Corrected variable name
+                datasets: [{
+                    label: 'Total Kendaraan', // Updated label
+                    data: total_kendaraan,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 
     {{-- datatables --}}
     <div class="container">
@@ -140,7 +210,9 @@
                         [10, 25, 50, 100, -1], // Rows per page options
                         ['10', '25', '50', '100', 'All'] // Labels for the rows per page options
                     ],
-                    order: [[0, 'desc']],
+                    order: [
+                        [0, 'desc']
+                    ],
                     buttons: [{
                             extend: 'copy',
                             exportOptions: {

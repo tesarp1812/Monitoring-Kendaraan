@@ -27,10 +27,10 @@
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label class="form-label">Pilih Kendaraan</label>
-                                        <select class="form-select" aria-label="Default select example" name="inputIdPinjam">
+                                        <select class="form-select" aria-label="Default select example" name="inputIdPinjam" id="inputIdPinjam">
                                             <option selected disabled>pilih kendaraan</option>
                                             @foreach ($formlaporan as $f)
-                                            <option value="{{ $f->id_pinjam }}">{{ $f->id_pinjam }} - {{$f->nama_driver}} - {{$f->kendaraan}} - {{$f->kembali}}</option>
+                                            <option value="{{ $f->id_pinjam }}" data-tanggal="{{$f->kembali}}" >{{$f->nama_driver}} - {{$f->kendaraan}} ({{$f->kembali}})</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -38,8 +38,9 @@
                                         <label class="form-label">Konsumsi BBM</label>
                                         <input type="number" class="form-control" placeholder="konsumsi bbm" name="inputbbm">
                                     </div><div class="mb-3">
-                                        <label class="form-label">Tanggal Laporan</label>
-                                        <input type="date" class="form-control" value="{{ $f->kembali }}" disabled>
+                                        <label class="form-label">Tanggal Laporan Kembali</label>
+                                        <input type="date" class="form-control" id="tanggal_laporan_disabled" disabled>
+                                        <input type="date" class="form-control" id="tanggal_laporan_editable" name="inputTanggal" hidden>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -82,4 +83,31 @@
         </div>
     </div>
 @endsection
+<script>
+   // Get the dropdown menu element
+   var dropdown = document.getElementById("inputIdPinjam");
+
+// Get the tanggal laporan input elements
+var tanggalLaporanDisabledInput = document.getElementById("tanggal_laporan_disabled");
+var tanggalLaporanEditableInput = document.getElementById("tanggal_laporan_editable");
+
+// Add an onchange event listener to the dropdown
+dropdown.addEventListener("change", function() {
+    // Get the selected option
+    var selectedOption = dropdown.options[dropdown.selectedIndex];
+    
+    // Get the data-tanggal attribute of the selected option
+    var selectedTanggal = selectedOption.getAttribute("data-tanggal");
+    
+    // Update the value of the tanggal laporan disabled input field
+    tanggalLaporanDisabledInput.value = selectedTanggal;
+
+    // Update the value of the tanggal laporan editable input field
+    tanggalLaporanEditableInput.value = selectedTanggal;
+});
+</script>
+
+
+
+
 @endsection
