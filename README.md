@@ -6,8 +6,6 @@
 - [Versi PHP](#versi-php)
 - [Framework](#framework)
 - [Panduan Penggunaan Aplikasi](#panduan-penggunaan-aplikasi)
-- [physical data model] ([https://drive.google.com/file/d/1VDK9bw3bnJFPx4qYupG2R0b19v-MDoHb/view?usp=sharing](https://drive.google.com/file/d/1PxcQcIit8VhNjAm4ATbjNNv6ouC7Dpj8/view?usp=sharing)).
-- [activity diagram] (https://drive.google.com/file/d/1BT8TNFYOd09Z3Szh_maaCqLnIrWk1zpL/view?usp=sharing)
 
 
 ## Daftar Username dan Password
@@ -53,6 +51,11 @@ Aplikasi ini dibangun dengan menggunakan framework Laravel versi 10.0.
     ```bash
     composer install
     ```
+     - Update dependensi menggunakan Composer.
+
+    ```bash
+    composer update
+    ```
 
     - Salin file `.env.example` menjadi `.env`.
 
@@ -85,4 +88,5 @@ Aplikasi ini dibangun dengan menggunakan framework Laravel versi 10.0.
 
 3. **Login:**
     - Gunakan username dan password dari [daftar username dan password](#daftar-username-dan-password) untuk login.
+    - untuk admin gunakan email : admin@admin.com password admin123
 
