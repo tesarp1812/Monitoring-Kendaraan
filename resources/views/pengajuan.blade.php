@@ -1,4 +1,4 @@
-@extends('index')
+@extends('layouts.index')
 @section('body')
     @if (session('success'))
         <script>
@@ -25,10 +25,15 @@
                 List Pengajuan Kendaraan
             </div>
             <div class="card-body">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formPengajuan">
-                    Form Pengajuan Kendaraan
-                </button>
+                @auth
+                    @if (auth()->user()->role == 'admin')
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formPengajuan">
+                            Form Pengajuan Kendaraan
+                        </button>
+                    @endif
+                @endauth
+
 
                 <!-- Modal -->
                 <div class="modal fade" id="formPengajuan" tabindex="-1" aria-labelledby="formPengajuanLabel"
@@ -45,7 +50,8 @@
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Kendaraan</label>
-                                        <select class="form-select" aria-label="Default select example" name="inputkendaraan">
+                                        <select class="form-select" aria-label="Default select example"
+                                            name="inputkendaraan">
                                             <option selected disabled>pilih kendaraan</option>
                                             @foreach ($kendaraan as $k)
                                                 <option value="{{ $k->id }}">{{ $k->nama }}</option>
@@ -74,11 +80,13 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal Pinjam</label>
-                                        <input type="date"  class="form-control datepicker" placeholder="Select a date" name="inputpinjam">
+                                        <input type="date" class="form-control datepicker" placeholder="Select a date"
+                                            name="inputpinjam">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal Kembali</label>
-                                        <input type="date" class="form-control datepicker" placeholder="Select a date" name="inputkembali">
+                                        <input type="date" class="form-control datepicker" placeholder="Select a date"
+                                            name="inputkembali">
                                     </div>
                                     <input type="hidden" value="belum setujui" name="inputstatus">
                                 </div>
@@ -174,10 +182,55 @@
                                             <td>{{ $list->kendaraan->nama }}</td>
                                             <td>{{ $list->driver->nama }}</td>
                                             <td>{{ $list->user->name }}</td>
+                                            <td>{{ $list->status }}</td>
+                                            <td>{{ $list->tanggal_pinjam }}</td>
+                                            <td>{{ $list->tanggal_kembali }}</td>
+                                            {{-- <td><a class="btn btn-primary" href="/ubah_status/{{ $list->id }}">{{ $list->status }}</a></td> --}}
                                             <td>
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#modalKepala">
+                                                    Persetujuan
+                                                </button>
 
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="modalKepala" tabindex="-1"
+                                                aria-labelledby="modalKepalaLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="modalKepalaLabel">
+                                                                Persetujuan Kepala Bagian
+                                                            </h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form action="update/{{ $list->id }}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="modal-body">
+                                                                Apakah Anda Mensetujui Kendaraan Sesuai Request ?
+                                                                <div class="mb-3">
+                                                                    <label for="inputuser" class="form-label"></label>
+                                                                    <select class="form-select" name="inputstatus"
+                                                                        required>
+                                                                        <option selected disabled>Persetujuan</option>
+                                                                        <option value="disetujui">Setujui</option>
+                                                                        <option value="tidak disetujui">Tidak Setujui
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Tutup</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             </td>
-                                            {{-- <td><a href="/ubah_status/{{ $list->id }}">{{ $list->status }}</a></td> --}}
                                         </tr>
                                     @endif
                                 @endauth

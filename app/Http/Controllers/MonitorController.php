@@ -24,6 +24,7 @@ class MonitorController extends Controller
             ->groupBy('tanggal')
             ->get();
 
+        // dd($riwayat);
         $data = DB::table('riwayat_kendaraans')
             ->select('tanggal', DB::raw('COUNT(id_pinjam) as total_kendaraan'))
             ->groupBy('tanggal')
@@ -83,7 +84,7 @@ class MonitorController extends Controller
         $kendaraan = kendaraan::get();
         $driver = driver::get();
         $user = User::get();
-        //dd($pengajuan);
+        // dd($pengajuan);
         return view('pengajuan', compact('pengajuan', 'kendaraan', 'driver', 'user'));
     }
 

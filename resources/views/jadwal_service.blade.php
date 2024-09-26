@@ -1,4 +1,4 @@
-@extends('index')
+@extends('layouts.index')
 @section('body')
 @section('table')
     <div class="container">

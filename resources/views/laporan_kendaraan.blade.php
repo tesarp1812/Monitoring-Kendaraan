@@ -1,4 +1,4 @@
-@extends('index')
+@extends('layouts.index')
 @section('body')
 @section('table')
     <div class="container">
@@ -8,9 +8,14 @@
             </div>
             <div class="card-body">
                 <!-- Button trigger modal -->
+                @auth
+                @if (auth()->user()->role == 'admin')
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Tambah Laporan
                 </button>
+                @endif
+                @endauth
+                
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
